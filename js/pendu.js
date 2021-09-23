@@ -6,8 +6,8 @@ var wordSplited;
 const initScore = 7;
 var currentScore;
 var currentWord;
-var longWord;
-var wordHide = [];
+var currentLetter;
+var hiddenWord = [];
 
 //------------------------CREATION DES FONCTIONS-----------------------------------
 
@@ -37,11 +37,13 @@ function menu() {
 function gameStart() {
   currentScore = initScore;
   console.log(currentScore);
-  wordChoice();
+  wordGenerate();
   replaceWord(currentWord);
+  letterCaptured();
+  return menu();
 }
 
-function wordChoice() {
+function wordGenerate() {
   let randWord = Math.floor(Math.random() * wordOfDico.length);
   currentWord = wordOfDico[randWord];
   return currentWord;
@@ -50,15 +52,16 @@ function wordChoice() {
 function replaceWord() {
   wordSplited = currentWord.split('');
   console.log(wordSplited);
-  let longWord = currentWord.length;
-  while (wordHide.length !== longWord) {
-    wordHide.push("_");
+  while (hiddenWord.length !== currentWord.length) {
+    hiddenWord.push("_");
   }
-  console.log(wordHide);
-  alert(`le mot choisit par l'ordinateur est :\n\n ${wordHide.join('  ')}`)
-  return wordHide.join(' ');
+  console.log(hiddenWord);
+  //alert(`le mot choisit par l'ordinateur est :\n\n ${hiddenWord.join('  ')}`)
+  return hiddenWord.join(' ');
 }
-
+function letterCaptured(){
+    currentLetter = prompt(`le mot choisit par l'ordinateur est :\n ${hiddenWord.join('  ')}\nIl vous reste encore ${currentScore} coup(s)\nMerci de saisir une lettre`)
+}
 function wordCompared() {
 
 }
