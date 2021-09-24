@@ -1,7 +1,13 @@
 //----------------------DECLARATION DES VARIABLE-----------------------------------
+
+var wordList = ["stylo", "chien", "chat", "ordinateur", "verre", "chocolat", "bougie", "cahier", "anticonstitutionnellement","Palourde","Creux","Faire","Siècle","Olive","Cou","Comte",
+"Bluff","Bronze","Claustrophobie","Amputer","Somnambule","Exercice","Modifier","Benne","Longue","Scientifique","Tournesol","Marginal","Russie","Esquimau","Clavier","Pouls","Joyau",
+"Fondue","Pipeline","Pauvres","Dent","Fausser","Analytique","Hormones","Dépression","Jump","Dupliquer","Urgence","Concubines","Bars","Pieds","Vol","JeudiBordeaux","Sourcils","Oreille",
+"Ovale","Beffroi","Cintre","Tube","alade","Saveur","Boulangerie","Swing","Voler","Pistolet","Nez","Doublure","Monstre","Ventiler","Baigner","Pratique","Objectifs","Clavier","Diamant",
+"Etriers","Falsifier","Cerceau","Cygne","Parieur","Roues","Coma","Coeur","Abdomen","Doigt","Viande","Muscle","Fesses","Bouche","Cou","Corps","Visage"];
+
 var interfaceChoice;
 var interfaceCheck;
-var wordList = ["stylo", "chien", "chat", "ordinateur", "verre", "chocolat", "bougie", "cahier", "anticonstitutionnellement"];
 var wordSplited = []; //mot découpé en lettre
 const initScore = 7;
 var currentScore;
@@ -42,7 +48,6 @@ function menu() {
 function gameStart() {
   currentScore = initScore;
   hiddenWord = [];
-  console.log("initial score : " + currentScore);//------------------------------------------------------------------------------------------------------------------------------------------------------------------
   wordGenerate();
   replaceWord(currentWord);
   return gamePlay();
@@ -50,9 +55,7 @@ function gameStart() {
 
 // Fonction pour le déroulement du jeu
 function gamePlay() {
-  console.log("score actuelle : " + currentScore);//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
   while (currentScore !== 0 && hiddenWord.join('') !== currentWord) {
-    //console.log(hiddenWord.join(''));//------------------------------------------------------------------------------------------------------------------------------------------------------------------
     letterCaptured();
     letterCompared();
     userScore();
@@ -75,17 +78,16 @@ function wordGenerate() {
 // Fonction qui remplace les lettres du mot choisi par l'ordinateur par des underscore
 function replaceWord() {
   wordSplited = currentWord.split('');
-  //console.log(wordSplited);//------------------------------------------------------------------------------------------------------------------------------------------------------------------
   while (hiddenWord.length !== currentWord.length) {
     hiddenWord.push("_");
   }
-  //console.log(hiddenWord);//------------------------------------------------------------------------------------------------------------------------------------------------------------------
   return hiddenWord.join('');
 }
 
-// Fonction qui permet au joueur de choisir sa lettre et qui vérifie si il n'en choisi qu'une seul a la fois
+// Fonction qui permet au joueur de choisir sa lettre et qui vérifie si il n'en choisi qu'une seul à la fois
 function letterCaptured() {
   currentLetter = prompt(`le mot choisit par l'ordinateur est :\n ${hiddenWord.join('  ')}\nIl vous reste encore ${currentScore} coup(s)\nMerci de saisir une lettre`)
+  currentLetter = currentLetter.toLocaleLowerCase();
   if (currentLetter.length !== 1) {
     alert("ATTENTION : une seul lettre est requise.")
     letterCaptured();
@@ -95,6 +97,7 @@ function letterCaptured() {
 
 // Fonction qui permet de comparer la lettre au mot pour connaitre si elle existe.
 function letterCompared() {
+  letterFind = false;
   for (var i = 0; i < wordSplited.length; i++) {
     if (wordSplited[i] === currentLetter) {
       hiddenWord[i] = currentLetter;
@@ -104,24 +107,21 @@ function letterCompared() {
   return letterFind;
 }
 
+// Fonction affichant si l'utilisateur a perdu et lui indique le mot qu'il fallait trouver
 function gameOver() {
   alert(`Vous avez été\n PENDU\nLe mot attendu etait : ${currentWord}`);
   return menu();
 }
 
+// Fonction de décrémentation du score de l'utilisateur
 function userScore(){
-  if (letterFind === true){
-    console.log("super");//------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  }
-  else {
-    letterFind = false;
+  if (letterFind === false){
     currentScore -= 1;
   }
   return currentScore;
 }
 
-
-//-------------------------DEROULEMENT DU JEU---------------------------------------
+//-------------------------LANCEMENT DU JEU---------------------------------------
 
 alert("Bienvenue sur le jeu du pendu");
 menu();
