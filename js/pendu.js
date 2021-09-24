@@ -16,7 +16,6 @@ var currentLetter; //lettre choisi par l'utilisateur
 var letterFind;
 var hiddenWord = []; //mot choisi par l'ordi transformé en underscore
 
-
 //------------------------CREATION DES FONCTIONS-----------------------------------
 
 // Fonction qui crée le menu de debut et fin de jeu
@@ -72,6 +71,7 @@ function gamePlay() {
 // Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi un tableau de mots
 function wordGenerate() {
   currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+  currentWord = currentWord.toLocaleLowerCase();
   return currentWord;
 }
 
