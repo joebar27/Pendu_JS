@@ -1,14 +1,14 @@
 //----------------------DECLARATION DES VARIABLE-----------------------------------
 var interfaceChoice;
 var interfaceCheck;
-var wordList = ["stylo", "chien", "chat", "ordinateur", "verre", "chocolat", "bougie", "cahier","anticonstitutionnellement"];
-var wordSplited;
+var wordList = ["stylo", "chien", "chat", "ordinateur", "verre", "chocolat", "bougie", "cahier", "anticonstitutionnellement"];
+var wordSplited = []; //mot découpé en lettre
 const initScore = 7;
 var currentScore;
-var currentWord;
-var currentLetter;
-var letterValide;
-var hiddenWord = [];
+var currentWord; //mot choisi par l'ordi
+var currentLetter; //lettre choisi par l'utilisateur
+var letterFind;
+var hiddenWord = []; //mot choisi par l'ordi transformé en underscore
 
 
 //------------------------CREATION DES FONCTIONS-----------------------------------
@@ -41,20 +41,27 @@ function menu() {
 // Fonction d'initialisation du jeu 
 function gameStart() {
   currentScore = initScore;
-  console.log(currentScore);
+  hiddenWord = [];
+  console.log("initial score : " + currentScore);//------------------------------------------------------------------------------------------------------------------------------------------------------------------
   wordGenerate();
   replaceWord(currentWord);
   return gamePlay();
 }
 
 // Fonction pour le déroulement du jeu
-function gamePlay(){
-  while(currentScore !== 0 /*&& wordFind() !== true*/){
-  letterCaptured();
-  wordCompared();
+function gamePlay() {
+  console.log("score actuelle : " + currentScore);//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+  while (currentScore !== 0 && hiddenWord.join('') !== currentWord) {
+    //console.log(hiddenWord.join(''));//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    letterCaptured();
+    letterCompared();
+    userScore();
   }
-  if(currentScore === 0){
-  gameOver();
+  if (currentScore === 0) {
+    gameOver();
+  }
+  else{
+    alert("vous avez trouver le mot");
   }
   return menu();
 }
@@ -68,49 +75,50 @@ function wordGenerate() {
 // Fonction qui remplace les lettres du mot choisi par l'ordinateur par des underscore
 function replaceWord() {
   wordSplited = currentWord.split('');
-  console.log(wordSplited);
+  //console.log(wordSplited);//------------------------------------------------------------------------------------------------------------------------------------------------------------------
   while (hiddenWord.length !== currentWord.length) {
     hiddenWord.push("_");
   }
-  console.log(hiddenWord);
-  //alert(`le mot choisit par l'ordinateur est :\n\n ${hiddenWord.join('  ')}`)
-  return hiddenWord.join(' ');
+  //console.log(hiddenWord);//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  return hiddenWord.join('');
 }
 
 // Fonction qui permet au joueur de choisir sa lettre et qui vérifie si il n'en choisi qu'une seul a la fois
-function letterCaptured(){
-    currentLetter = prompt(`le mot choisit par l'ordinateur est :\n ${hiddenWord.join('  ')}\nIl vous reste encore ${currentScore} coup(s)\nMerci de saisir une lettre`)
-    if(currentLetter.length !== 1){
-      alert("ATTENTION : une seul lettre est requise.")
-      letterCaptured();
-    }
-    //console.log(currentLetter);
-    return currentLetter;
+function letterCaptured() {
+  currentLetter = prompt(`le mot choisit par l'ordinateur est :\n ${hiddenWord.join('  ')}\nIl vous reste encore ${currentScore} coup(s)\nMerci de saisir une lettre`)
+  if (currentLetter.length !== 1) {
+    alert("ATTENTION : une seul lettre est requise.")
+    letterCaptured();
+  }
+  return currentLetter;
 }
 
 // Fonction qui permet de comparer la lettre au mot pour connaitre si elle existe.
-function wordCompared() {
-  console.log(currentWord + " compared");
-  if (currentWord.search(currentLetter) === -1){
-    currentScore -= 1;
-    alert(`La lettre ${currentLetter} n'est pas contenue dans le mot`)
-    return currentScore;
+function letterCompared() {
+  for (var i = 0; i < wordSplited.length; i++) {
+    if (wordSplited[i] === currentLetter) {
+      hiddenWord[i] = currentLetter;
+      letterFind = true;
+    } 
   }
-  else {
-    console.log(currentWord[currentWord.search(currentLetter)]);
-    console.log(currentWord.search(currentLetter));
-    letterValide = currentWord[currentWord.search(currentLetter)];
-    console.log(letterValide);
-    return letterValide;
-  }
+  return letterFind;
 }
 
 function gameOver() {
-    alert("Vous avez été\n PENDU");
+  alert(`Vous avez été\n PENDU\nLe mot attendu etait : ${currentWord}`);
   return menu();
 }
 
-
+function userScore(){
+  if (letterFind === true){
+    console.log("super");//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  }
+  else {
+    letterFind = false;
+    currentScore -= 1;
+  }
+  return currentScore;
+}
 
 
 //-------------------------DEROULEMENT DU JEU---------------------------------------
