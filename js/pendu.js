@@ -1,22 +1,44 @@
-//----------------------DECLARATION DES VARIABLE-----------------------------------
+//----------------------DECLARATION DES TABLEAUX DE MOT-----------------------------------
 
-var wordList = ["stylo", "chien", "chat", "ordinateur", "verre", "chocolat", "bougie", "cahier", "anticonstitutionnellement","Palourde","Creux","Faire","Siècle","Olive","Cou","Comte",
+var wordListGlobal = ["stylo", "chien", "chat", "ordinateur", "verre", "chocolat", "bougie", "cahier", "anticonstitutionnellement","Palourde","Creux","Faire","Siècle","Olive","Cou","Comte",
 "Bluff","Bronze","Claustrophobie","Amputer","Somnambule","Exercice","Modifier","Benne","Longue","Scientifique","Tournesol","Marginal","Russie","Esquimau","Clavier","Pouls","Joyau",
 "Fondue","Pipeline","Pauvres","Dent","Fausser","Analytique","Hormones","Dépression","Jump","Dupliquer","Urgence","Concubines","Bars","Pieds","Vol","JeudiBordeaux","Sourcils","Oreille",
 "Ovale","Beffroi","Cintre","Tube","alade","Saveur","Boulangerie","Swing","Voler","Pistolet","Nez","Doublure","Monstre","Ventiler","Baigner","Pratique","Objectifs","Clavier","Diamant",
-"Etriers","Falsifier","Cerceau","Cygne","Parieur","Roues","Coma","Coeur","Abdomen","Doigt","Viande","Muscle","Fesses","Bouche","Cou","Corps","Visage"];
+"Etriers","Falsifier","Cerceau","Cygne","Parieur","Roues","Coma","Coeur","Abdomen","Doigt","Viande","Muscle","Fesses","Bouche","Cou","Corps","Visage","REVOYEZ","CONTENT","AFGHANS","ASSYRIE","RAIMOND",
+"BATEAUX","HAUTAIN","MOQUONS","TRAPPES","TOMBEUR","BOUTENT","INFOUTU","NOMMAIT","VITESSE","OCCULUS","LAVIGNE","ULCERES","HUILEUX","EPOPEES","VENTEUX","RIDEAUX","BLAGUER","FRELONS","SLALOMS","COUDERT",
+"TRANSFO","SULFATE","REMPLIE","ALCALIN","BARRIER","ASSAGIT","NIRVANA","LARMOIE","TORRIDE","LISSAGE","ATTISEE","ETRIPER","SIDEREE","REMOISE","TONDENT","DELARUE","ACTUELS","ASSURES","FANCHON","SERVIER",
+"NASALES","LECOMTE","VEAUTER","BRISEES","SATURER","ALLEGES","DUNNING","HOMELIE","QUINTAL","DIVERSE","REELIRE","CORINNE","SONDIER","RENOUEE","COLLEES","BAISAGE","BIDOCHE","PAPESSE","SURPAYE","UPVOTEE",
+"MIXTURE","INFORMA","NASALES","EMETTRE","CANTONS","ROMANDE","MORAINE","DANSEUR","REFERME","FLUVIAL","DENIENT","SPOILEZ","PRETERA","EMETTRA","ERIGNAC","AUDITER","CIRAGES","NOTAIRE","POTIONS","ENROBER",
+"PLIABLE","RECALER","TANTALE","ROSETTE","JEUNENT","ECZEMAS","NAVIRES","DEROBES","EXILANT","ANNULEE","ISABEAU","OFFRIRA","RISQUEZ","TUTORES","LAURENS",];
+
+var wordListAnimaux = ["Escargot","Poney","Thon","Gorille","Voler","Méduse","Autruche","Langouste","Chien","Crocodile","Girafe","Oie","Mouflon","Oursin","Tortue","Mouton","Chinchilla","Ours","Faucon","Souris",
+  "Serpent","Chameau","Iguane","Oie","Pie","Cerf","Sauterelle","Papillon","Sanglier","Crabe","Mollusque","Colombe","Mule","Hippopotame","Lion","Corbeau","Kangourou","Moustique","Perroquet","Scarabée","Loup","Aigle",
+  "Faisan","Vache","Calmar","Singe","Koala","Paresseux","Cygne"];
+
+var wordListEnfant = ["Anneau","Noir","Loup","Dix","Livre","Sol","Pomme","Marguerite","Poussin","Jump","Pantalon","Montagne","Requin","Grand","Films","Vendeur","Fiche","Bouche","Girafe","Moto","Sucette","Loupe",
+  "Panda","Ventre","Fleur","Lait","Professeur","Poisson","Marteau","Taxi","Tigre","Chaussettes","Cuisinier","Feuilles","Lit","Sandwich","Herbe","Poire","Couteau","Argent","Nez","Malade","Craie","Trois","Lanterne",
+  "Automne","Grain","raisin","Neige","Nappe","Rire","Chat","Casque","Pain","Dauphin","Vert","Jardin","Chapeau","Viande","Quatre","Vache","Lune","Verre","Chocolat","Poulet","DessusCintre","Main","Triangle","Baignoire",
+  "Boisson"];
+
+//-----------------------------------------------------------------DECLARATION DES VARIABLE--------------------------------------------------------------------------
 
 var interfaceChoice;
 var interfaceCheck;
+var askPlayerTheme;
 var wordSplited = []; //mot découpé en lettre
-const initScore = 7;
-var currentScore;
+const initScore = 7; // initialisation du score en debut de partie
+var currentScore; //score indiqué à l'utilisateur toute la partie
 var currentWord; //mot choisi par l'ordi
 var currentLetter; //lettre choisi par l'utilisateur
-var letterFind;
+var letterFind; //declare si l'utilisateur a trouvé une bonne lettre
 var hiddenWord = []; //mot choisi par l'ordi transformé en underscore
 
+<<<<<<< HEAD
 //------------------------CREATION DES FONCTIONS-----------------------------------
+=======
+
+//-------------------------------------------------------------------CREATION DES FONCTIONS--------------------------------------------------------------------------
+>>>>>>> 5d34b1a20f2d18d1ec0a4950d3e7674e17da999b
 
 // Fonction qui crée le menu de debut et fin de jeu
 function menu() {
@@ -47,14 +69,32 @@ function menu() {
 function gameStart() {
   currentScore = initScore;
   hiddenWord = [];
-  wordGenerate();
+  themechoice();
   replaceWord(currentWord);
   return gamePlay();
 }
 
+// Fonction pour le choix du theme de mot choisi
+function themechoice() {
+  askPlayerTheme = prompt(`Voulez vous choisir un thème en particulier ?
+    - Vous pouvez choisir des mots Généraux en tapant : 'G'
+    - Vous pouvez choisir des mots sur les Animaux en tapant : 'A'
+    - Vous pouvez choisir des mots pour les Enfants en tapant : 'E'`);
+    askPlayerTheme = askPlayerTheme.toLocaleLowerCase();
+  switch (askPlayerTheme){
+    case "a" : generateWordAnimaux();
+    break;
+    case "g" : generateWordGlobal();
+    break;
+    case "e" : generateWordEnfant();
+    break;
+    default : themechoice();
+    break;
+  }
+}
 // Fonction pour le déroulement du jeu
 function gamePlay() {
-  while (currentScore !== 0 && hiddenWord.join('') !== currentWord) {
+  while (currentScore !== 0 && hiddenWord.join('') !== currentWord) {//
     letterCaptured();
     letterCompared();
     userScore();
@@ -68,9 +108,30 @@ function gamePlay() {
   return menu();
 }
 
+<<<<<<< HEAD
 // Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi un tableau de mots
 function wordGenerate() {
   currentWord = wordList[Math.floor(Math.random() * wordList.length)];
+=======
+// Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi le tableau de mot : général
+function generateWordGlobal() {
+  currentWord = wordListGlobal[Math.floor(Math.random() * wordListGlobal.length)];
+  console.log(currentWord);
+  currentWord = currentWord.toLocaleLowerCase();
+  return currentWord;
+}
+// Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi le tableau de mot : animaux
+function generateWordAnimaux() {
+  currentWord = wordListAnimaux[Math.floor(Math.random() * wordListAnimaux.length)];
+  console.log(currentWord);
+  currentWord = currentWord.toLocaleLowerCase();
+  return currentWord;
+}
+// Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi le tableau de mot : enfant
+function generateWordEnfant() {
+  currentWord = wordListEnfant[Math.floor(Math.random() * wordListEnfant.length)];
+  console.log(currentWord);
+>>>>>>> 5d34b1a20f2d18d1ec0a4950d3e7674e17da999b
   currentWord = currentWord.toLocaleLowerCase();
   return currentWord;
 }
@@ -121,7 +182,7 @@ function userScore(){
   return currentScore;
 }
 
-//-------------------------LANCEMENT DU JEU---------------------------------------
+//--------------------------------------------------------------------------LANCEMENT DU JEU-----------------------------------------------------------------------------------------
 
 alert("Bienvenue sur le jeu du pendu");
 menu();
