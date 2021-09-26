@@ -33,12 +33,9 @@ var currentLetter; //lettre choisi par l'utilisateur
 var letterFind; //declare si l'utilisateur a trouvé une bonne lettre
 var hiddenWord = []; //mot choisi par l'ordi transformé en underscore
 
-<<<<<<< HEAD
-//------------------------CREATION DES FONCTIONS-----------------------------------
-=======
 
 //-------------------------------------------------------------------CREATION DES FONCTIONS--------------------------------------------------------------------------
->>>>>>> 5d34b1a20f2d18d1ec0a4950d3e7674e17da999b
+
 
 // Fonction qui crée le menu de debut et fin de jeu
 function menu() {
@@ -108,11 +105,6 @@ function gamePlay() {
   return menu();
 }
 
-<<<<<<< HEAD
-// Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi un tableau de mots
-function wordGenerate() {
-  currentWord = wordList[Math.floor(Math.random() * wordList.length)];
-=======
 // Fonction pour la génération aléatoire du mot choisi par l'ordinateur parmi le tableau de mot : général
 function generateWordGlobal() {
   currentWord = wordListGlobal[Math.floor(Math.random() * wordListGlobal.length)];
@@ -131,7 +123,6 @@ function generateWordAnimaux() {
 function generateWordEnfant() {
   currentWord = wordListEnfant[Math.floor(Math.random() * wordListEnfant.length)];
   console.log(currentWord);
->>>>>>> 5d34b1a20f2d18d1ec0a4950d3e7674e17da999b
   currentWord = currentWord.toLocaleLowerCase();
   return currentWord;
 }
